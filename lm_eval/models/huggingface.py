@@ -687,12 +687,20 @@ class HFLM(TemplateLM):
             else:
                 # get the HF hub name via accessor on model
                 model_name = self.model.name_or_path
-            self.tokenizer = transformers.AutoTokenizer.from_pretrained(
-                model_name,
-                revision=revision,
-                trust_remote_code=trust_remote_code,
-                use_fast=use_fast_tokenizer,
-            )
+            if 'cogvlm-' in model_name:
+                self.tokenizer = transformers.LlamaTokenizer.from_pretrained(
+                    'lmsys/vicuna-7b-v1.5',
+                    revision=revision,
+                    trust_remote_code=trust_remote_code,
+                    use_fast=use_fast_tokenizer,
+                )
+            else:
+                self.tokenizer = transformers.AutoTokenizer.from_pretrained(
+                    model_name,
+                    revision=revision,
+                    trust_remote_code=trust_remote_code,
+                    use_fast=use_fast_tokenizer,
+                )
         return None
 
     def _detect_batch_size(self, requests=None, pos: int = 0):
