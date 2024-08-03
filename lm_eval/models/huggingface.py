@@ -1290,6 +1290,9 @@ class HFLM(TemplateLM):
 
             if "max_length" not in kwargs:
                 kwargs["max_length"] = context_enc.shape[1] + max_gen_toks
+            
+            if 'cogvlm' in self.pretrained:
+                kwargs['token_type_ids'] = torch.ones_like(attn_masks, dtype=torch.long, device=attn_masks.device)*0
 
             # perform batched generation
             cont = self._model_generate(
