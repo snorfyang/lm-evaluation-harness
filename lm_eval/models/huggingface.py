@@ -559,8 +559,16 @@ class HFLM(TemplateLM):
                         model_kwargs["bnb_4bit_compute_dtype"] = get_dtype(
                             model_kwargs["bnb_4bit_compute_dtype"]
                         )
-            if 'llava-hf' in pretrained:
+            if 'llava-hf' in pretrained and 'v1.5' in pretrained:
                 self._model = transformers.LlavaForConditionalGeneration.from_pretrained(
+                    pretrained,
+                    revision=revision,
+                    torch_dtype=get_dtype(dtype),
+                    trust_remote_code=trust_remote_code,
+                    **model_kwargs,
+                )
+            elif 'llava-hf' in pretrained and 'v1.6' in pretrained:
+                self._model = transformers.LlavaNextForConditionalGeneration.from_pretrained(
                     pretrained,
                     revision=revision,
                     torch_dtype=get_dtype(dtype),
