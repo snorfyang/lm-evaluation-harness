@@ -1,6 +1,4 @@
-dataset_path: parquet
-dataset_kwargs:
-  data_files: /home/bruno/data-rsteven1/vizwiz/captioned-vizwiz.parquet
+dataset_path: snorfyang/captioned-vizwiz
 output_type: generate_until
 doc_to_text: !function utils.vizwiz_vqa_doc_to_text
 doc_to_target: "answer"

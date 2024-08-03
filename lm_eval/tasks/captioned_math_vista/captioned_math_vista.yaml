@@ -1,6 +1,5 @@
-dataset_path: parquet
+dataset_path: snorfyang/captioned-math-vista
 dataset_kwargs:
-  data_files: /home/bruno/data-rsteven1/mathvista/captioned-math-vista.parquet
   token: True
 task: "captioned-math-vista"
 test_split: train

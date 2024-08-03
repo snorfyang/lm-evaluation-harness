@@ -1,6 +1,5 @@
-dataset_path: parquet
+dataset_path: snorfyang/captioned-llava-in-the-wild
 dataset_kwargs:
-  data_files: /home/bruno/data-rsteven1/llava-wild/llava-in-the-wild.parquet
   token: True
 task: captioned-llava-in-the-wild
 test_split: train
