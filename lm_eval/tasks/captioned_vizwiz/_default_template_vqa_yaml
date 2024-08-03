@@ -1,0 +1,9 @@
+dataset_path: parquet
+dataset_kwargs:
+  data_files: /home/bruno/data-rsteven1/vizwiz/captioned-vizwiz.parquet
+output_type: generate_until
+doc_to_text: !function utils.vizwiz_vqa_doc_to_text
+doc_to_target: "answer"
+metadata:
+  version: 0.0
+process_results: !function utils.vizwiz_vqa_process_results

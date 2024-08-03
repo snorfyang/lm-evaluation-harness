@@ -567,7 +567,7 @@ class HFLM(TemplateLM):
                     trust_remote_code=trust_remote_code,
                     **model_kwargs,
                 )
-            elif 'llava' in pretrained and 'v1.6' in pretrained:
+            elif 'llava' in pretrained and ('v1.6' in pretrained or 'next' in pretrained):
                 self._model = transformers.LlavaNextForConditionalGeneration.from_pretrained(
                     pretrained,
                     revision=revision,
