@@ -2,7 +2,7 @@ dataset_path: snorfyang/captioned-mme
 dataset_kwargs:
   token: True
 task: "captioned-mme"
-test_split: train
+test_split: test
 output_type: generate_until
 doc_to_text: !function utils.mme_doc_to_text
 doc_to_target: "answer"

@@ -8,11 +8,14 @@ import datetime
 import statistics
 
 from lm_eval.tasks._task_utils.vqa_eval_metric import EvalAIAnswerProcessor
-
 from loguru import logger as eval_logger
 
 
-def vizwiz_vqa_process_results(doc, result):
+def textvqa_doc_to_visual(doc):
+    return [doc["image"].convert("RGB")]
+
+
+def textvqa_process_results(doc, result):
     eval_ai_processor = EvalAIAnswerProcessor()
     assert len(result) == 1, f"The result should be a list of length 1, but got {len(result)}."
     resAns = eval_ai_processor(result[0])
@@ -29,18 +32,15 @@ def vizwiz_vqa_process_results(doc, result):
             matchingAns = [item for item in otherGTAns if item in resAns]
             acc = min(1, float(len(matchingAns)) / 3)
             gtAcc.append(acc)
-        if gtAcc:
-            accuracy = statistics.mean(gtAcc)
-        else:
-            accuracy = 0
+        accuracy = statistics.mean(gtAcc)
 
     return {
         "exact_match": accuracy,
     }
 
 
-def vizwiz_vqa_doc_to_text(doc,):
-    pre_prompt = f"Here is the detailed description of the image: {doc['captions-sharecaptioner']} {doc['captions-llava']} {doc['captions-phi']}\n"
-    post_prompt = "\nWhen the provided information is insufficient, respond with 'Unanswerable'.\nAnswer the question using a single word or phrase."
-    text = f"{pre_prompt} {doc['question'].capitalize()} {post_prompt}"
-    return text
+def textvqa_doc_to_text(doc, model_specific_prompt_kwargs=None):
+    pre_prompt = f'Here is the detailed description of the image: {doc["captions-sharecaptioner"]} {doc["captions-llava"]} {doc["captions-phi"]}\n'
+    post_prompt = "\nAnswer the question using a single word or phrase."
+    ocr_ref = ""
+    return f"{pre_prompt}{doc['question'].capitalize()}{ocr_ref}{post_prompt}"

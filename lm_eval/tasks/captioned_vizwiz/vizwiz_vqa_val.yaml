@@ -1,9 +1,10 @@
 task: captioned-vizwiz
-test_split: train
+test_split: val
 include: _default_template_vqa_yaml
 generation_kwargs:
-  until:
-    - "ASSISTANT:"
+  max_new_tokens: 128
+  temperature: 0
+  do_sample: False
 metric_list:
   - metric: exact_match
     aggregation: mean

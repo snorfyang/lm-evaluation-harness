@@ -1,0 +1,9 @@
+dataset_path: snorfyang/captioned-textvqa
+output_type: generate_until
+doc_to_text: !function utils.textvqa_doc_to_text
+doc_to_target: "answer"
+generation_kwargs:
+  max_new_tokens: 64
+  temperature: 0
+  do_sample: False
+process_results: !function utils.textvqa_process_results

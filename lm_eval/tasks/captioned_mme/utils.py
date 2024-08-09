@@ -34,7 +34,7 @@ replace_prompt = " Please answer yes or no."
 
 
 def mme_doc_to_text(doc):
-    question = f'Here is the detailed description of the image: {doc["captions-sharecaptioner"]} {doc["captions-phi"]} {doc["question"]}\nAnswer the question with Yes or No.'.strip()
+    question = f'Here is the detailed description of the image: {doc["captions-sharecaptioner"]} {doc["captions-llava"]} {doc["captions-phi"]} {doc["question"]}\nAnswer the question with Yes or No.'.strip()
     return question
 
 
